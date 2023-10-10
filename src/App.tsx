@@ -1,11 +1,12 @@
 import { BrowserRouter } from 'react-router-dom';
 import EagerRoutes from './EagerRoutes';
 import LazyRoutes from './LazyRoutes';
+import NavigationBar from './components/NavigationBar';
 
 const App = () => {
   return (
     <BrowserRouter>
-      <h1>Navigation</h1>
+      <NavigationBar />
       <LazyRoutes />
     </BrowserRouter>
   );

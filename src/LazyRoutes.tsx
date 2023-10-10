@@ -18,3 +18,26 @@ const Loadable = <P extends object>(Component: ComponentType<P>) => {
 
   return LazyComponents;
 };
+/* Lazy Loaded Todos Pages for code splitting */
+const WorkTodosPage = Loadable(
+  lazy(() => {
+    return import('./pages/WorkTodosPage');
+  }),
+);
+const ShoppingListPage = Loadable(
+  lazy(() => {
+    return import('./pages/ShoppingListPage');
+  }),
+);
+const LoginPage = Loadable(
+  lazy(() => {
+    return import('./pages/LoginPage');
+  }),
+);
+type Paths = { work: string; shoppingList: string; auth: string };
+/* we will reuse this in creating todos */
+export const pathNames: Paths = {
+  auth: '/auth',
+  shoppingList: '/shopping-list',
+  work: '/',
+};

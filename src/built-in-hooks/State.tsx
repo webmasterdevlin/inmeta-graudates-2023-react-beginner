@@ -41,6 +41,38 @@ export default function State() {
           <span>{count} :</span>
           <span>{theme}</span>
         </div>
+        <Button color="primary" onClick={incrementCount}>
+          INCREMENT
+        </Button>
+      </div>
+      <section className="mb-8">
+        <p className="text-indigo-800">
+          {user.firstName} {user.lastName}
+        </p>
+      </section>
+      <div>
+        <section>
+          <label htmlFor="firstName">First Name: </label>
+          <input
+            id="firstName"
+            value={user.firstName}
+            onChange={e => {
+              return setUser({ ...user, firstName: e.target.value });
+            }}
+          />
+        </section>
+        <section>
+          <label htmlFor="lastName">Last Name: </label>
+          <input
+            id="lastName"
+            value={user.lastName}
+            onChange={e => {
+              return setUser(prev => {
+                return { ...prev, lastName: e.target.value };
+              });
+            }}
+          />
+        </section>
       </div>
     </>
   );

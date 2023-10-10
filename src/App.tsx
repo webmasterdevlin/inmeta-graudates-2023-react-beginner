@@ -10,8 +10,8 @@ const App = () => {
       <div className="container prose mx-auto px-4">
         <State />
       </div>
-      <NavigationBar />
-      <LazyRoutes />
+      {/* <NavigationBar />
+      <LazyRoutes /> */}
     </BrowserRouter>
   );
 };

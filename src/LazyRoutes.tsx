@@ -1,6 +1,8 @@
+import path from 'path';
 import React, { lazy, Suspense } from 'react';
-import { useRoutes, RouteObject } from 'react-router';
+import { useRoutes } from 'react-router';
 import type { ComponentType, PropsWithChildren, FC } from 'react';
+import type { RouteObject } from 'react-router';
 
 /*
  * Suspense is a component that wraps the custom components and
@@ -41,3 +43,26 @@ export const pathNames: Paths = {
   shoppingList: '/shopping-list',
   work: '/',
 };
+/*
+ * object-based routing
+ * nesting routes is another way of writing routes
+ */
+const lazyRoutes: RouteObject[] = [
+  {
+    element: <WorkTodosPage />,
+    path: pathNames.work,
+  },
+  {
+    element: <ShoppingListPage />,
+    path: pathNames.shoppingList,
+  },
+  {
+    element: <LoginPage />,
+    path: pathNames.auth,
+  },
+];
+const LazyRoutes = () => {
+  const contents = useRoutes(lazyRoutes);
+  return <>{contents}</>;
+};
+export default LazyRoutes;

@@ -4,7 +4,8 @@ import Button from '../components/Button';
 // The useEffect Hook allows you to perform side effects in your components.
 // Some examples of side effects are: fetching data, directly updating the DOM, and timers.
 // useEffect accepts two arguments.
-// The second argument is optional. useEffect(<function>, <dependency>)
+// () => {} this is an empty parameters callback function
+// The second argument is optional. useEffect(<no param callback function>, <dependency>)
 export default function Effect1() {
   const [resourceType, setResourceType] = useState('posts');
   const [items, setItems] = useState<any[]>([]);

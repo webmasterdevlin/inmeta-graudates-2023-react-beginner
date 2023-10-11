@@ -49,3 +49,5 @@ const FormSubmssion = ({ save }: Props) => {
     </form>
   );
 };
+
+export default FormSubmssion;

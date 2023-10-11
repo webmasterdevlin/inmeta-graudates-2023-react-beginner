@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import { Check as CheckIcon, Circle as CircleIcon } from 'react-feather';
 import { EndPoints } from '../api/axiosConfig';
-import { deleteAxios, getAxios, putAxios } from '../api/genericApiCalls';
+import { deleteAxios, getAxios, postAxios, putAxios } from '../api/genericApiCalls';
 import Button from '../components/Button';
+import FormSubmssion from '../components/FormSubmission';
 import useBudget from '../custom-hooks/useBudget';
 import MainLayout from '../views/MainLayout';
 import type { Todo } from '../models/todoType';
@@ -62,10 +63,28 @@ const WorkTodosPage = () => {
     }
   };
 
+  const handleSubmit = async (values: any) => {
+    setLoading(true);
+    try {
+      const { data } = await postAxios<Todo>(EndPoints.todos, values);
+      // updating the state in the UI
+      const newTodos = [...todos, data];
+      setTodos(newTodos);
+    } catch (e) {
+      console.log(e);
+    }
+    setLoading(false);
+  };
+
   return (
     <MainLayout>
-      <h1>Work Todos Page Works!</h1>
-
+      <h2>
+        Budget for the day: USD <span>{randomValues}</span>
+      </h2>
+      <button className="btn btn--secondary" type="button" onClick={createRandomBudget}>
+        GET RANDOM
+      </button>
+      <FormSubmssion save={handleSubmit} />
       <section className="mb-10">
         {todos.map((t, i) => {
           return (

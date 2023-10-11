@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Check as CheckIcon, Circle as CircleIcon } from 'react-feather';
 import { EndPoints } from '../api/axiosConfig';
-import { deleteAxios, getAxios } from '../api/genericApiCalls';
+import { deleteAxios, getAxios, putAxios } from '../api/genericApiCalls';
 import Button from '../components/Button';
 import useBudget from '../custom-hooks/useBudget';
 import MainLayout from '../views/MainLayout';
@@ -50,6 +50,18 @@ const WorkTodosPage = () => {
     setLoading(false);
   };
 
+  const updateWorkTodoAsync = async (todo: Todo) => {
+    try {
+      todo.completed = !todo.completed;
+      await putAxios<void, Todo>(EndPoints.todos, todo.id, todo);
+      // update the UI after sending the request to the server
+      const updatedTodos = [...todos];
+      setTodos(updatedTodos);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   return (
     <MainLayout>
       <h1>Work Todos Page Works!</h1>
@@ -60,10 +72,18 @@ const WorkTodosPage = () => {
             <div key={t.id} className="mb-3 flex flex-row items-center justify-start">
               <div className="mr-2">
                 {t.completed ? (
-                  <CheckIcon />
+                  <CheckIcon
+                    onClick={async () => {
+                      return await updateWorkTodoAsync(t);
+                    }}
+                  />
                 ) : (
                   <div>
-                    <CircleIcon />
+                    <CircleIcon
+                      onClick={async () => {
+                        return await updateWorkTodoAsync(t);
+                      }}
+                    />
                   </div>
                 )}
               </div>

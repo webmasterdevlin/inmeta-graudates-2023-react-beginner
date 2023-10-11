@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import Button from '../components/Button';
 
 // The React useMemo Hook returns a memoized value.
@@ -10,13 +10,25 @@ export default function Memo() {
   const [number, setNumber] = useState(0);
   const [dark, setDark] = useState(false);
 
-  const doubleNumber = slowFunction(number); // changing theme will cause this to run
+  // const doubleNumber = slowFunction(number); // changing theme will cause this to run
 
-  const themeStyles = {
-    // useEffect will run when setNumber is called
-    backgroundColor: dark ? 'black' : 'white',
-    color: dark ? 'white' : 'black',
-  };
+  const doubleNumber = useMemo(() => {
+    return slowFunction(number);
+  }, [number]);
+
+  // const themeStyles = {
+  //   // useEffect will run when setNumber is called
+  //   backgroundColor: dark ? 'black' : 'white',
+  //   color: dark ? 'white' : 'black',
+  // };
+
+  const themeStyles = useMemo(() => {
+    // useEffect will not run when setNumber is called
+    return {
+      backgroundColor: dark ? 'black' : 'white',
+      color: dark ? 'white' : 'black',
+    };
+  }, [dark]);
 
   useEffect(() => {
     console.log('Theme changed');

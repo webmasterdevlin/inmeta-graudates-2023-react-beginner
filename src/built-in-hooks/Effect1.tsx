@@ -12,6 +12,7 @@ export default function Effect1() {
 
   console.log('render');
 
+  // ngOnit, onMounted = a life cycle hook is an automatic event when your component loads
   useEffect(() => {
     console.log('run useEffect');
     fetch(`https://jsonplaceholder.typicode.com/${resourceType}`)

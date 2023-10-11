@@ -36,7 +36,8 @@ const WorkTodosPage = () => {
   const deleteWorkTodoAsync = async (id: string) => {
     setLoading(true);
     try {
-      await deleteAxios(EndPoints.todos, id); // mutating a row in the database
+      // mutating (deleting) a row in the database
+      await deleteAxios(EndPoints.todos, id);
       // remove the selected item from the todos state
       const filteredTodos = todos.filter(t => {
         return t.id !== id;

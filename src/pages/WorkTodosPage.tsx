@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Check as CheckIcon, Circle as CircleIcon } from 'react-feather';
 import { EndPoints } from '../api/axiosConfig';
-import { getAxios } from '../api/genericApiCalls';
+import { deleteAxios, getAxios } from '../api/genericApiCalls';
+import Button from '../components/Button';
 import useBudget from '../custom-hooks/useBudget';
 import MainLayout from '../views/MainLayout';
 import type { Todo } from '../models/todoType';
@@ -32,6 +33,22 @@ const WorkTodosPage = () => {
     setLoading(false);
   };
 
+  const deleteWorkTodoAsync = async (id: string) => {
+    setLoading(true);
+    try {
+      await deleteAxios(EndPoints.todos, id); // mutating a row in the database
+      // remove the selected item from the todos state
+      const filteredTodos = todos.filter(t => {
+        return t.id !== id;
+      });
+      // update the UI using the setter function of the todos local state or useState
+      setTodos(filteredTodos);
+    } catch (e) {
+      console.log(e);
+    }
+    setLoading(false);
+  };
+
   return (
     <MainLayout>
       <h1>Work Todos Page Works!</h1>
@@ -49,10 +66,19 @@ const WorkTodosPage = () => {
                   </div>
                 )}
               </div>
+
+              <Button
+                onClick={async () => {
+                  if (t.completed) await deleteWorkTodoAsync(t.id);
+                }}
+              >
+                {t.title}
+              </Button>
             </div>
           );
         })}
       </section>
+      <h3>{loading ? 'Loading..' : 'You have ' + todos.length + ' todo'}</h3>
     </MainLayout>
   );
 };

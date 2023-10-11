@@ -18,6 +18,7 @@ export default function Effect2() {
       // Otherwise, memory leak will happen that will cause the app to slow down or crash.
       // It's gonna run before the useEffect function runs again.
       // It's gonna run when the component unmounts.
+      // destroying the resource
       window.removeEventListener('resize', handleResize);
     };
   }, []);

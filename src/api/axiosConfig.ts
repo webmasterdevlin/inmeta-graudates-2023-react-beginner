@@ -5,8 +5,8 @@ export const api = axios.create({
 });
 
 export const EndPoints = {
-  todos: '/todos',
-  users: '/users',
+  todos: 'todos',
+  users: 'users',
 } as const;
 
 export type EndPointsKeys = keyof typeof EndPoints;

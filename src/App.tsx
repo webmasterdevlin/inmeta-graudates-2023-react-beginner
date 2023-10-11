@@ -22,8 +22,8 @@ const App = () => {
         {/* <State /> */}
         {/* <Effect1 /> */}
         {/* <Effect2 /> */}
-        <Effect3 cost={20} discount={4} />
-        {/* <Memo /> */}
+        {/* <Effect3 cost={20} discount={4} /> */}
+        <Memo />
         {/* <Callback /> */}
         {/* <Ref /> */}
       </div>

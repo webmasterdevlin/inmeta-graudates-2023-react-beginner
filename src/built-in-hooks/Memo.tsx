@@ -12,23 +12,11 @@ export default function Memo() {
 
   const doubleNumber = slowFunction(number); // changing theme will cause this to run
 
-  // const doubleNumber = useMemo(() => {
-  //   return slowFunction(number); // changing theme will not cause this to run
-  // }, [number]); // only run when number changes
-
   const themeStyles = {
     // useEffect will run when setNumber is called
     backgroundColor: dark ? 'black' : 'white',
     color: dark ? 'white' : 'black',
   };
-
-  // const themeStyles = useMemo(() => {
-  //   // useEffect will not run when setNumber is called
-  //   return {
-  //     backgroundColor: dark ? 'black' : 'white',
-  //     color: dark ? 'white' : 'black',
-  //   };
-  // }, [dark]);
 
   useEffect(() => {
     console.log('Theme changed');

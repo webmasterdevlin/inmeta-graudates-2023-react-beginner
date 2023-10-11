@@ -19,8 +19,8 @@ const App = () => {
   return (
     <BrowserRouter>
       <div className="container prose mx-auto px-4">
-        <State />
-        {/* <Effect1 /> */}
+        {/* <State /> */}
+        <Effect1 />
         {/* <Effect2 /> */}
         {/* <Effect3 cost={20} discount={4} /> */}
         {/* <Memo /> */}

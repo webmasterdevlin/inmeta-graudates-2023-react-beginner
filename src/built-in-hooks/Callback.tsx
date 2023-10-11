@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import Button from '../components/Button';
 import List from './components/List';
 
@@ -14,19 +14,19 @@ export default function Callback() {
   const [dark, setDark] = useState(false);
 
   // imagine this function is resource intensive or an HTTP request
-  const fetchItems = (incrementor: number) => {
-    // This function gets re-created on every render.
-    console.log('HTTP GET fetching items');
-    return [number + incrementor, number + 1 + incrementor, number + 2 + incrementor];
-  };
+  // const fetchItems = (incrementor: number) => {
+  //   // This function gets re-created on every render.
+  //   console.log('HTTP GET fetching items');
+  //   return [number + incrementor, number + 1 + incrementor, number + 2 + incrementor];
+  // };
 
-  // const fetchItems = useCallback(
-  //   (incrementor: number) => {
-  //     console.log('HTTP GET fetching items');
-  //     return [number + incrementor, number + 1 + incrementor, number + 2 + incrementor];
-  //   },
-  //   [number],
-  // );
+  const fetchItems = useCallback(
+    (incrementor: number) => {
+      console.log('HTT GET fetching items');
+      return [number + incrementor, number + 1 + incrementor, number + 2 + incrementor];
+    },
+    [number],
+  );
 
   const theme = {
     backgroundColor: dark ? 'black' : 'white',

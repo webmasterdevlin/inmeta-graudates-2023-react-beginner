@@ -25,14 +25,14 @@ export default function Ref() {
   return (
     <>
       <input
-        // ref={inputRef} // inputRef.current = input element
-        value={inputRef.current?.value} // no need to set value
+        ref={inputRef} // inputRef.current = input element
+        // value={inputRef.current?.value} // no need to set value
         onChange={(e: ChangeEvent<HTMLInputElement>) => {
-          // if (inputRef.current) {
-          //   inputRef.current.value = e.target.value; // does not cause re-render
-          // }
+          if (inputRef.current) {
+            inputRef.current.value = e.target.value; // does not cause re-render
+          }
           console.log('logs:', { event: e.target.value, inputRef: inputRef.current?.value });
-          setName(e.target.value); // causes re-render
+          // setName(e.target.value); // causes re-render
         }}
       />
       <div>
